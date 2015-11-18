@@ -195,6 +195,11 @@ return [
 	 * If you are storing cookies, you better change it to a name you of your own.
 	 */
 	'tracker_cookie_name' => 'please_change_this_cookie_name',
+	
+	/**
+	 * In minutes.
+	 */
+	'tracker_cookie_time' => 0,
 
 	/**
 	 * Internal tracker session name.
