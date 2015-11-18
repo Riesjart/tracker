@@ -43,9 +43,9 @@ class Session extends Base {
 		return $this->belongsTo($this->getConfig()->get('referer_model'));
 	}
 
-	public function geoIp()
+    	public function clientIp()
 	{
-		return $this->belongsTo($this->getConfig()->get('geoip_model'), 'geoip_id');
+	        return $this->belongsTo($this->getConfig()->get('client_ip_model'));
 	}
 
 	public function cookie()
