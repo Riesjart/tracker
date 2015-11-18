@@ -215,6 +215,8 @@ return [
 	/**
 	 * You can use your own model for every single table Tracker has.
 	 */
+	 
+	 'client_ip_model' => PragmaRX\Tracker\Vendor\Laravel\Models\ClientIp::class,
 
     'session_model' => 'PragmaRX\Tracker\Vendor\Laravel\Models\Session',
 
