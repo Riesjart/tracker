@@ -156,6 +156,8 @@ class ServiceProvider extends PragmaRXServiceProvider {
             {
                 $uaParser = null;
             }
+            
+            $clientIpModel = $this->instantiateModel('client_ip_model');
 
             $sessionModel = $this->instantiateModel('session_model');
 
@@ -249,6 +251,9 @@ class ServiceProvider extends PragmaRXServiceProvider {
 	        );
 
 	        return new RepositoryManager(
+	        	
+			new ClientIp($clientIpModel),	        	
+	        	
 	            new GeoIp(),
 
 	            new MobileDetect,
