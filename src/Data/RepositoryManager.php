@@ -5,6 +5,7 @@ namespace PragmaRX\Tracker\Data;
 use PragmaRX\Support\GeoIp;
 use PragmaRX\Support\Config;
 use PragmaRX\Tracker\Support\MobileDetect;
+use PragmaRX\Tracker\Data\Repositories\ClientIp;
 use PragmaRX\Tracker\Data\Repositories\Log;
 use PragmaRX\Tracker\Data\Repositories\Path;
 use PragmaRX\Tracker\Data\Repositories\Query;
@@ -80,6 +81,8 @@ class RepositoryManager implements RepositoryManagerInterface {
 	private $geoIp;
 
 	private $geoIpRepository;
+
+	private $clientIpRepository;
 
 	/**
 	 * @var Repositories\SqlQuery
@@ -158,6 +161,8 @@ class RepositoryManager implements RepositoryManagerInterface {
 		CrawlerDetector $crawlerDetector
     )
     {
+    	$this->clientIpRepository = $clientIpRepository;
+    	
 	    $this->authentication = $authentication;
 
 	    $this->mobileDetect = $mobileDetect;
@@ -230,6 +235,11 @@ class RepositoryManager implements RepositoryManagerInterface {
     {
         return $this->sessionRepository->findOrCreate($data, array('uuid'));
     }
+    
+    public function findOrCreateClientIp($data)
+    {
+        return $this->clientIpRepository->findOrCreate($data, ['client_ip']);
+    }    
 
 	public function findOrCreatePath($path)
 	{
@@ -250,6 +260,11 @@ class RepositoryManager implements RepositoryManagerInterface {
     {
         return $this->findOrCreateAgent($this->getCurrentAgentArray());
     }
+    
+    public function getClientIpId($data)
+    {
+        return $this->findOrCreateClientIp($data, ['client_ip']);
+    }    
 
     public function getCurrentUserAgent()
     {
