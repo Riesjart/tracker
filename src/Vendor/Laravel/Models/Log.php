@@ -71,10 +71,11 @@ class Log extends Base {
 				, $this->getConnection()->raw('count(tracker_log.id) as value')
 			)
 			->join('tracker_sessions', 'tracker_log.session_id', '=', 'tracker_sessions.id')
-			->join('tracker_geoip', 'tracker_sessions.geoip_id', '=', 'tracker_geoip.id')
+                	->join('tracker_client_ips', 'tracker_sessions.client_ip_id', '=', 'tracker_client_ips.id')
+                	->join('tracker_geoip', 'tracker_client_ips.geoip_id', '=', 'tracker_geoip.id')
 			->groupBy('tracker_geoip.country_name')
 			->period($minutes, 'tracker_log')
-			->whereNotNull('tracker_sessions.geoip_id')
+			->whereNotNull('tracker_client_ips.geoip_id')
 			->orderBy('value', 'desc');
 
 		if ($results)
