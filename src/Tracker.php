@@ -77,8 +77,7 @@ class Tracker
 		$sessionData = array(
 			'user_id' => $this->getUserId(),
 			'device_id' => $this->getDeviceId(),
-			'client_ip' => $this->request->getClientIp(),
-			'geoip_id' => $this->getGeoIpId(),
+			'client_ip_id' => $this->getClientIpId(),
 			'agent_id' => $this->getAgentId(),
 			'referer_id' => $this->getRefererId(),
 			'cookie_id' => $this->getCookieId(),
@@ -364,6 +363,15 @@ class Tracker
 				? $this->dataRepositoryManager->getGeoIpId($this->request->getClientIp())
 				: null;
 	}
+	
+    	private function getClientIpId()
+    	{
+        	return $this->dataRepositoryManager->getClientIpId([
+
+    			'client_ip' => $this->request->getClientIp(),
+            		'geoip_id' => $this->getGeoIpId(),
+        	]);
+    	}	
 
 	private function getAgentId()
 	{
